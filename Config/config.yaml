@@ -1,0 +1,89 @@
+zip_file_name: 
+    "State_Covid_Data"
+number_of_days: 
+    5
+url: 
+    "https://healthdata.gov/resource/j8mb-icvb.json"
+expected_schema: 
+    {
+        "date": "datetime64[ns]",
+        "state_name": "string",
+        "overall_outcome": "string",
+        "new_results_reported": "int",
+        "total_results_reported": "int"
+    }
+positive_table_schema: 
+    {
+        "date": "Date",
+        "new_results_reported": "New Positive Tests Reported",
+        "total_results_reported": "Total Positive Tests Reported"
+    }
+negative_table_schema:
+    {
+        "date": "Date",
+        "new_results_reported": "New Negative Tests Reported",
+        "total_results_reported": "Total Negative Tests Reported"
+    }
+output_columns:
+    [
+        "Date",
+        "New Positive Tests Reported",
+        "New Negative Tests Reported",
+        "Total Positive Tests Reported",
+        "Total Negative Tests Reported"
+    ]
+state_names:
+  [
+    "Alaska",
+    "Alabama",
+    "Arkansas",
+    "Arizona",
+    "California",
+    "Colorado",
+    "Connecticut",
+    "Delaware",
+    "Florida",
+    "Georgia",
+    "Hawaii",
+    "Iowa",
+    "Idaho",
+    "Illinois",
+    "Indiana",
+    "Kansas",
+    "Kentucky",
+    "Louisiana",
+    "Massachusetts",
+    "Maryland",
+    "Maine",
+    "Michigan",
+    "Minnesota",
+    "Missouri",
+    "Mississippi",
+    "Montana",
+    "North Carolina",
+    "North Dakota",
+    "Nebraska",
+    "New Hampshire",
+    "New Jersey",
+    "New Mexico",
+    "Nevada",
+    "New York",
+    "Ohio",
+    "Oklahoma",
+    "Oregon",
+    "Pennsylvania",
+    "Rhode Island",
+    "South Carolina",
+    "South Dakota",
+    "Tennessee",
+    "Texas",
+    "Utah",
+    "Virginia",
+    "Vermont",
+    "Washington",
+    "Wisconsin",
+    "West Virginia",
+    "Wyoming"
+]
+results_directory:
+    "Results"
