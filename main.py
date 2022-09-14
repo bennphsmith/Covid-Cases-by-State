@@ -9,7 +9,11 @@ import requests
 import pandas as pd
 
 from datetime import datetime
-from custom_errors import StatusCodeInvalid, ExpectedColumnsNotFound, IncorrectNumberOfDates
+from custom_errors import \
+    StatusCodeInvalid,\
+    ExpectedColumnsNotFound,\
+    IncorrectNumberOfDates,\
+    MisMatchedDateRange
 
 
 ###### Collect and Process Data from API ######
@@ -151,24 +155,33 @@ if __name__ == "__main__":
             covid_testing_json=covid_testing_json,
             expected_schema=config['expected_schema']
         )
+        # Create table view for Positive Covid results
         df_positive = create_output_table(
             df_covid_testing=df_covid_testing,
             outcome_type="Positive",
             number_of_days=config['number_of_days'],
             output_schema=config['positive_table_schema']
         )
+        # Create table view for Negative Covid results
         df_negative = create_output_table(
             df_covid_testing=df_covid_testing,
             outcome_type="Negative",
             number_of_days=config['number_of_days'],
             output_schema=config['negative_table_schema']
         )
+        # Merge the Output tables to get final Output
         df_final_output = pd.merge(
             df_positive,
             df_negative,
-            how='left',
+            how='inner',
             on='Date'
         )[config['output_columns']]
+
+        # Check table join consistent and date index syncs completely
+        if len(df_final_output) != len(df_positive) != len(df_negative):
+            raise MisMatchedDateRange(df_positive['Date'].to_list(), df_negative['Date'].to_list())
+
+        # Save table and header into a word doc
         word_doc = create_word_document(
             state_name=state_name,
             df=df_final_output,
