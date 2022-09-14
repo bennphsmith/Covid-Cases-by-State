@@ -3,7 +3,7 @@
 
 ## Description
 Generates zip file of word documents containing N most recent 
-days of Covid case data per State. Information is called form
+days of Covid case data per State. Information is called from
 the following API:
 https://healthdata.gov/dataset/COVID-19-Diagnostic-Laboratory-Testing-PCR-Testing/j8mb-icvb
 
